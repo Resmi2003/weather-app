@@ -4,7 +4,10 @@ import { useState } from "react";
 
 // API key used to authenticate requests to OpenWeather server
 // Without this key, the API will not return data
-const API_KEY = "ebf276bcf5de231e9675b82e1767e9a9";
+// process.env is used to read the API key from environment variables
+// This prevents hard-coding sensitive data in frontend code
+const API_KEY = process.env.REACT_APP_API_KEY;
+
 
 // This is the main React component
 // Function name MUST start with capital letter
