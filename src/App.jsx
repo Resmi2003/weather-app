@@ -108,17 +108,17 @@ function App() {
     // min-h-screen = full screen height
     // bg-blue-100 = background color
     // p-4 = padding
-    <div className="min-h-screen bg-blue-100 p-4">
+    <div className="min-h-screen bg-blue-100 p-3 sm:p-4 md:p-6">
 
       {/* HEADER SECTION */}
-      <div className="bg-blue-200 rounded-xl p-4 text-center mb-4">
+      <div className="bg-blue-200 rounded-xl p-3 sm:p-4 text-center mb-4">
 
         {/* App Title */}
-        <h1 className="text-2xl font-semibold">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-semibold">
 
           {/* Cloud icon from Font Awesome */}
           {/* className is used instead of class in React */}
-          <i className="fa-regular fa-cloud text-blue-500 text-3xl"></i>
+          <i className="fa-regular fa-cloud text-blue-500 text-2xl sm:text-3xl"></i>
 
           {/* Space between icon and text */}
           {" "}Weather App
@@ -126,43 +126,40 @@ function App() {
       </div>
 
       {/* SEARCH SECTION */}
-      <div className="bg-white p-4 rounded-xl shadow flex gap-2 mb-4">
+      <div className="bg-white p-3 sm:p-4 rounded-xl shadow flex flex-col sm:flex-row gap-2 mb-4">
 
         {/* Input field */}
         <input
-          className="border p-2 flex-1 rounded" // Tailwind styles
-          placeholder="Enter city name"          // Hint text
-          value={city}                           // value from state
-          onChange={(e) =>                       // event handler
-            setCity(e.target.value)              // update city state
+          className="border p-2 flex-1 rounded w-full"
+          placeholder="Enter city name"
+          value={city}
+          onChange={(e) =>
+            setCity(e.target.value)
           }
         />
 
         {/* Button */}
         <button
-          onClick={fetchWeather}                 // call function on click
-          className="bg-blue-500 text-white px-4 rounded"
+          onClick={fetchWeather}
+          className="bg-blue-500 text-white px-4 py-2 rounded w-full sm:w-auto"
         >
           Search
         </button>
       </div>
 
       {/* ERROR MESSAGE */}
-      {/* Shows only if error is not empty */}
       {error && (
-        <p className="text-red-500 text-center">
+        <p className="text-red-500 text-center text-sm sm:text-base">
           {error}
         </p>
       )}
 
       {/* CURRENT WEATHER SECTION */}
-      {/* Render only if current data exists */}
       {current && (
 
         <div
-          className="rounded-2xl p-6 text-white mb-4"
+          className="rounded-2xl p-4 sm:p-6 text-white mb-4"
           style={{
-            // Inline CSS for background image
             backgroundImage:
               "url('https://www.weathercompany.com/wp-content/uploads/2024/01/AdobeStock_359999296-sized.jpg')",
             backgroundSize: "cover",
@@ -170,7 +167,7 @@ function App() {
         >
 
           {/* City Name */}
-          <h2 className="text-xl font-semibold">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold">
             Weather in{" "}
             <span className="text-red-400">
               {current.name}
@@ -178,7 +175,7 @@ function App() {
           </h2>
 
           {/* Local Time */}
-          <p className="text-sm mb-2">
+          <p className="text-xs sm:text-sm mb-2">
             Local Time: {new Date().toLocaleTimeString()}
           </p>
 
@@ -186,18 +183,18 @@ function App() {
           <div className="text-center my-4">
 
             {/* Temperature value */}
-            <p className="text-5xl font-bold text-purple-500">
+            <p className="text-3xl sm:text-4xl md:text-5xl font-bold text-purple-500">
               {current.main.temp}°C
             </p>
 
             {/* Weather description */}
-            <p className="capitalize">
+            <p className="capitalize text-sm sm:text-base">
               {current.weather[0].description}
             </p>
           </div>
 
           {/* Extra Details */}
-          <div className="grid grid-cols-2 gap-2 text-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm">
 
             <p>Feels like: {current.main.feels_like}°C</p>
             <p>Humidity: {current.main.humidity}%</p>
@@ -209,22 +206,21 @@ function App() {
       )}
 
       {/* FORECAST SECTION */}
-      {/* Render only if forecast array has data */}
       {forecast.length > 0 && (
         <>
-          <h2 className="text-xl font-semibold text-center mb-3">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-center mb-3">
             5-Day Forecast
           </h2>
 
           {/* Grid layout */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
 
             {/* Loop through forecast array */}
             {forecast.map((day, index) => (
 
               <div
-                key={index}                      // unique key for React
-                className="rounded-xl p-4 text-center shadow"
+                key={index}
+                className="rounded-xl p-3 sm:p-4 text-center shadow text-white"
                 style={{
                   backgroundImage:
                     "url('https://www.weathercompany.com/wp-content/uploads/2024/01/AdobeStock_359999296-sized.jpg')",
@@ -233,17 +229,17 @@ function App() {
               >
 
                 {/* Date */}
-                <p className="text-red-500 font-semibold">
+                <p className="text-red-300 font-semibold text-sm sm:text-base">
                   {new Date(day.dt_txt).toLocaleDateString()}
                 </p>
 
                 {/* Temperature */}
-                <p className="text-lg font-bold">
+                <p className="text-lg sm:text-xl font-bold">
                   {day.main.temp}°C
                 </p>
 
                 {/* Description */}
-                <p className="capitalize text-sm">
+                <p className="capitalize text-xs sm:text-sm">
                   {day.weather[0].description}
                 </p>
 
